@@ -18,4 +18,8 @@ class Oystercard
     (@balance + amount) > @max_balance
   end
 
+  def deduct(amount)
+    @balance -= amount
+  end
+
 end

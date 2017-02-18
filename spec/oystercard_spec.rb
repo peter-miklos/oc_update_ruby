@@ -21,4 +21,12 @@ describe Oystercard do
       expect{card.top_up(91)}.to raise_error("You cannot exceed the max balance (£#{max_b})")
     end
   end
+
+  describe "touch_in" do
+
+  end
+
+  describe "touch_out" do
+
+  end
 end
