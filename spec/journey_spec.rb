@@ -42,6 +42,11 @@ describe Journey do
       journey_2 = described_class.new(nil)
       expect(journey_2.finish(station_2)).to eq Journey::PENALTY_FARE
     end
+
+    it "saves the calculated fare" do
+      journey.finish(station_2)
+      expect(journey.instance_variable_get("@fare")).to eq 4
+    end
   end
 
 end

@@ -4,7 +4,7 @@ class JourneyLog
     @journey_class = journey_class
     @current_journey = nil
     @journeys = []
-    @fare = 0
+    @current_fare = 0
   end
 
   def start(station)
@@ -13,9 +13,9 @@ class JourneyLog
   end
 
   def finish(station)
-    @fare = @current_journey.finish(station)
-    @journeys << @current_journey
-    @current_journey = nil
+    @current_fare = @current_journey.finish(station)
+    save_journey
+    reset_journey
   end
 
   def in_journey?
@@ -23,9 +23,18 @@ class JourneyLog
   end
 
   def get_fare
-    temp_fare = @fare
-    @fare = 0
+    temp_fare, @current_fare = @current_fare, 0
     temp_fare
+  end
+
+  private
+
+  def save_journey
+    @journeys << @current_journey
+  end
+
+  def reset_journey
+    @current_journey = nil
   end
 
 end

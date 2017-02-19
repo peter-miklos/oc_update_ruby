@@ -6,11 +6,12 @@ class Journey
   def initialize(station)
     @entry_station = station
     @exit_station = nil
+    @fare = 0
   end
 
   def finish(station)
     @exit_station = station
-    calculate_fare
+    @fare = calculate_fare
   end
 
   private
