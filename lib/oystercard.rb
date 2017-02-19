@@ -16,9 +16,11 @@ class Oystercard
   def touch_in(station)
     fail "Your balance is too low, please top-up" if @balance <= MIN_BALANCE
     @journey_log.start(station)
+    deduct(@journey_log.get_fare)
   end
 
   def touch_out(station)
+    @journey_log.start(nil) unless @journey_log.in_journey?
     fare = @journey_log.finish(station)
     deduct(fare)
   end
