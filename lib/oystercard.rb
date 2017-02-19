@@ -21,8 +21,8 @@ class Oystercard
 
   def touch_out(station)
     @journey_log.start(nil) unless @journey_log.in_journey?
-    fare = @journey_log.finish(station)
-    deduct(fare)
+    @journey_log.finish(station)
+    deduct(@journey_log.get_fare)
   end
 
   private

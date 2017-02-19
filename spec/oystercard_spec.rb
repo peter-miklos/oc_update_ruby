@@ -64,7 +64,13 @@ describe Oystercard do
       card.touch_out(station_2)
     end
 
+    it "calls the get_fare method on journey_log" do
+      expect(journey_log).to receive(:get_fare)
+      card.touch_out(station_2)
+    end
+
     it "deducts the fare from the balance" do
+      allow(journey_log).to receive(:get_fare).and_return(1)
       card.touch_out(station_2)
       expect(card.instance_variable_get("@balance")).to eq 19
     end
