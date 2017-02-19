@@ -13,6 +13,7 @@ class JourneyLog
   end
 
   def finish(station)
+    start(nil) unless in_journey?
     @current_fare = @current_journey.finish(station)
     save_journey
     reset_journey

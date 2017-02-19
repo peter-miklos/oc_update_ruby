@@ -19,8 +19,8 @@ describe JourneyLog do
       expect(journey_log.instance_variable_get("@current_journey")).to eq journey
     end
 
-    it "calls the finish method with nil if user is still in journey" do
-      expect(journey_log).to receive(:finish).with(nil)
+    it "calls the finish method on current journey with nil if user is still in journey" do
+      expect(journey).to receive(:finish).with(nil)
       journey_log.start(station_1)
     end
   end
@@ -29,12 +29,18 @@ describe JourneyLog do
 
     before(:each) { journey_log.start(station_1) }
 
-    it "calls the finish method on the journey with a station" do
+    it "calls instantiate the journey with nil as an entry station if not in journey" do
+      journey_log.finish(station_2)
+      expect(journey_class).to receive(:new).with(nil)
+      journey_log.finish(station_2)
+    end
+
+    it "calls the finish method on the current journey with a station" do
       expect(journey).to receive(:finish).with(station_2)
       journey_log.finish(station_2)
     end
 
-    it "sets the fare received from the journey itself" do
+    it "sets the fare received from the current journey itself" do
       journey_log.finish(station_2)
       expect(journey_log.instance_variable_get("@current_fare")).to eq 1
     end
