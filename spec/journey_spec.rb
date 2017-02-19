@@ -2,8 +2,8 @@ require 'journey'
 
 describe Journey do
 
-  let(:station_1) { double :station_1 }
-  let(:station_2) { double :station_2 }
+  let(:station_1) { double(:station_1, zone: 2) }
+  let(:station_2) { double(:station_2, zone: 5) }
   let(:journey) { described_class.new(station_1)}
 
   describe "#initialize" do
@@ -26,8 +26,12 @@ describe Journey do
       expect(journey.instance_variable_get("@exit_station")).to eq station_2
     end
 
-    it "returns the min fare if there are entry and exit stations added" do
-      expect(journey.finish(station_2)).to eq Journey::MIN_FARE
+    it "calculates 4 for fare between zone 2 and 5 and returns it" do
+      expect(journey.finish(station_2)).to eq 4
+    end
+
+    it "calculates 1 for fare between stations in the same zone and returns it" do
+      expect(journey.finish(station_1)).to eq 1
     end
 
     it "returns penalty fare if exit station is missing" do

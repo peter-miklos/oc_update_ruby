@@ -17,10 +17,14 @@ class Journey
 
   def calculate_fare
     if !!@entry_station && !!@exit_station
-      MIN_FARE
+      MIN_FARE + extra_charge
     else
       PENALTY_FARE
     end
+  end
+
+  def extra_charge
+    MIN_FARE * (@entry_station.zone - @exit_station.zone).abs
   end
 
 end
