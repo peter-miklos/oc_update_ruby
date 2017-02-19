@@ -4,6 +4,7 @@ class JourneyLog
     @journey_class = journey_class
     @current_journey = nil
     @journeys = []
+    @outstanding_charge = 0
   end
 
   def start(station)
@@ -12,10 +13,13 @@ class JourneyLog
 
   def finish(station)
     @current_journey.finish(station)
+    @journeys << @current_journey
     @current_journey = nil
   end
 
   def in_journey?
     !!@current_journey
   end
+
+
 end

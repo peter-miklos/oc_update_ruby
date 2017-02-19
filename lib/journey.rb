@@ -1,11 +1,11 @@
 class Journey
 
   MIN_FARE = 1
+  PENALTY_FARE = 6
 
   def initialize(entry_station)
     @entry_station = entry_station
     @exit_station = nil
-    @fare = MIN_FARE
   end
 
   def finish(exit_station)
@@ -16,7 +16,11 @@ class Journey
   private
 
   def calculate_fare
-    # TBD
+    if !!@entry_station && !!@exit_station
+      MIN_FARE
+    else
+      PENALTY_FARE
+    end
   end
 
 end
