@@ -3,13 +3,13 @@ class Journey
   MIN_FARE = 1
   PENALTY_FARE = 6
 
-  def initialize(entry_station)
-    @entry_station = entry_station
+  def initialize(station)
+    @entry_station = station
     @exit_station = nil
   end
 
-  def finish(exit_station)
-    @exit_station = exit_station
+  def finish(station)
+    @exit_station = station
     calculate_fare
   end
 
